@@ -1,0 +1,19 @@
+= Rack::Gsub
+
+== Description
+
+This is a Rack middleware wrapper for gsub. You can replace text on your
+web page without worrying about accidentally modifying the HTML tags
+themselves.
+
+== Usage
+
+This will replace all occurrences of "five" with "three" and will remove all
+occurrences of "the":
+
+  use Rack::Gsub, "five" => "three", "the" => ""
+
+Note that you can use regular expressions, too, just like with Ruby's gsub.
+This is the syntax for using within Rails' config/environment.rb:
+
+  config.middleware.use Rack::Gsub, "five" => "three", "the" => ""
