@@ -19,11 +19,6 @@ This is the syntax for using within Rails' config/environment.rb:
 
 == Details
 
-Only text within the body of the document is replaced.  The following will
-only replace the word "five" in the body, not in the page's title:
-
-  use Rack::Gsub, "five" => "5"
-
 You can use regular expressions, too, just like with Ruby's gsub:
 
   use Rack::Gsub, /five/ => "5"
@@ -34,4 +29,16 @@ do a case-insensitive replace:
 
   use Rack::Gsub, /five/i => "5"
 
+Only text within the body of the document is replaced.  The following will
+only replace the word "five" in the body, not in the page's title:
+
+  use Rack::Gsub, "five" => "5"
+
 Rack::Gsub does not replace the text inside form elements.
+
+Rack::Gsub eventually passes the arguments to Ruby's String.gsub method,
+so it behaves the same way.
+
+  use Rack::Gsub, /five/ => "5"
+  # gets turned into
+  string.gsub(/five/, "5")
