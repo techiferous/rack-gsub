@@ -1,2 +1,7 @@
+0.1.0 (July 18, 2010)
+* Explained the API in more detail in the README.
+* Gsub no longer replaces the text of form elements.
+* Added automated tests.
+
 0.0.0 (December 3, 2009)
 * Initial release.
