@@ -16,8 +16,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |s|
     s.name          = "rack-gsub"
-    s.version       = "0.0.0"
-    s.add_dependency 'rack-plastic', '>= 0.0.3'
+    s.version       = "0.1.0"
+    s.add_dependency 'rack-plastic', '>= 0.1.1'
     s.author        = "Wyatt Greene"
     s.email         = "techiferous@gmail.com"
     s.summary       = "Rack middleware wrapper for gsub."
@@ -40,5 +40,5 @@ begin
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
-  puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
+  puts "Jeweler (or a dependency) not available. Install it with: gem install jeweler"
 end
