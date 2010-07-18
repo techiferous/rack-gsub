@@ -162,4 +162,36 @@ class GsubTest < Test::Unit::TestCase
     assert_html_equal expected_html, after_html
   end
 
+  def test_form_elements_not_replaced
+    before_html = %Q{
+      <html>
+        <head><title>Testing Rack::Gsub</title></head>
+        <body>
+          <div id="container">
+            <p>
+              The contents of form elements should not be replaced by default.
+              <form action="/users/signup" class="signup_new_user" id="foo" method="post">
+                <input id="user_name" name="user[name]" size="80" tabindex="1" type="text"
+                       value="This should not be replaced.">
+                <select id="subscription_id" name="subscription_id" tabindex="2">
+                  <option value="1" selected>This should not be replaced.</option>
+                  <option value="2">This also should not be replaced.</option>
+                </select>
+                <textarea cols="20" id="commitment_note" name="commitment[note]" rows="10" tabindex="18">
+                  This should not be replaced.
+                </textarea>
+                <div class="actions">
+                  <input id="user_submit" name="commit" tabindex="3" type="submit"
+                         value="This should not be replaced.">
+                </div>
+              </form>
+            </p>
+          </div>
+        </body>
+      </html>
+    }
+    after_html = process_html(before_html, Rack::Gsub, 'This' => '!!!')
+    assert_html_equal before_html, after_html
+  end
+
 end
