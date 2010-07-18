@@ -13,7 +13,11 @@ occurrences of "the":
 
   use Rack::Gsub, "five" => "three", "the" => ""
 
-Note that you can use regular expressions, too, just like with Ruby's gsub.
 This is the syntax for using within Rails' config/environment.rb:
 
   config.middleware.use Rack::Gsub, "five" => "three", "the" => ""
+
+== Details
+
+Only text within the body of the document is replaced.
+You can use regular expressions, too, just like with Ruby's gsub.
