@@ -19,9 +19,18 @@ This is the syntax for using within Rails' config/environment.rb:
 
 == Details
 
-Only text within the body of the document is replaced.
-The text is case-sensitive.
+Only text within the body of the document is replaced.  The following will
+only replace the word "five" in the body, not in the page's title:
+
+  use Rack::Gsub, "five" => "5"
+
 You can use regular expressions, too, just like with Ruby's gsub:
 
   use Rack::Gsub, /five/ => "5"
+  use Rack::Gsub, /f\w+e/ => "5"
+
+By default, the arguments are case-sensitive.  Use the /i regex switch to
+do a case-insensitive replace:
+
+  use Rack::Gsub, /five/i => "5"
 

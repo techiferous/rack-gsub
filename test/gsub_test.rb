@@ -125,4 +125,41 @@ class GsubTest < Test::Unit::TestCase
     assert_html_equal expected_html, after_html
   end
 
+  def test_case_insensitive_regex_replace
+    before_html = %Q{
+      <!DOCTYPE html
+      PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+      <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+        <head>
+          <title>Testing Rack::Gsub</title>
+        </head>
+        <body>
+          one ONE One
+          two TWO Two
+          three THREE Three
+          four FOUR Four
+        </body>
+      </html>
+    }
+    expected_html = %Q{
+      <!DOCTYPE html
+      PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+      <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+        <head>
+          <title>Testing Rack::Gsub</title>
+        </head>
+        <body>
+          1 ONE One
+          two TWO Two
+          3 3 3
+          four FOUR Four
+        </body>
+      </html>
+    }
+    after_html = process_html(before_html, Rack::Gsub, /one/ => '1', /three/i => '3')
+    assert_html_equal expected_html, after_html
+  end
+
 end
