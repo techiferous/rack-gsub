@@ -34,3 +34,4 @@ do a case-insensitive replace:
 
   use Rack::Gsub, /five/i => "5"
 
+Rack::Gsub does not replace the text inside form elements.
