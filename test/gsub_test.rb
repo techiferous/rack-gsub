@@ -82,4 +82,47 @@ class GsubTest < Test::Unit::TestCase
     assert_html_equal expected_html, after_html
   end
 
+  def test_regex_replace
+    before_html = %Q{
+      <!DOCTYPE html
+      PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+      <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+        <head>
+          <title>Testing Rack::Gsub</title>
+        </head>
+        <body>
+          I'm getting better!
+          No, you're not.  You'll be stone dead in a moment.
+          Oh, I can't take him like that; it's against regulations.
+          I don't want to go in the cart!
+          Oh, don't be such a baby.
+          I can't take him...
+          I feel fine!
+        </body>
+      </html>
+    }
+    expected_html = %Q{
+      <!DOCTYPE html
+      PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+      <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+        <head>
+          <title>Testing Rack::Gsub</title>
+        </head>
+        <body>
+          I'm getting better!
+          No, you're not.  You'll be stone dead in a moment.
+          Oh, I can't take him like th**; it's against regul**ions.
+          I don't want to go in the c**t!
+          Oh, don't be such a baby.
+          I can't take him...
+          I feel fine!
+        </body>
+      </html>
+    }
+    after_html = process_html(before_html, Rack::Gsub, /a[t,r]/ => '**')
+    assert_html_equal expected_html, after_html
+  end
+
 end
